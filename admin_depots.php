@@ -10,12 +10,15 @@ $depots = $pdo->query("SELECT * FROM depots ORDER BY block, number")->fetchAll()
 <?php include __DIR__.'/admin_layout_top.php'; ?>
 
 <div class="card card-glass p-3">
-    <div class="d-flex justify-content-between align-items-center mb-3">
+    <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
         <h5 class="mb-0">Depo Tipleri / Durumları</h5>
-        <span class="small text-secondary">
-            <span class="badge badge-depo-free me-1">&nbsp;</span> Boş
-            <span class="badge badge-depo-full ms-3 me-1">&nbsp;</span> Dolu
-        </span>
+        <div class="d-flex align-items-center gap-3">
+            <span class="small text-secondary">
+                <span class="badge badge-depo-free me-1">&nbsp;</span> Boş
+                <span class="badge badge-depo-full ms-3 me-1">&nbsp;</span> Dolu
+            </span>
+            <a href="admin_depot_types.php" class="btn btn-sm btn-outline-warning">Depo Tiplerini Yönet</a>
+        </div>
     </div>
     <div class="row g-2">
         <?php foreach ($depots as $depo): 

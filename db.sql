@@ -41,6 +41,22 @@ FROM
           SELECT 113 UNION SELECT 114 UNION SELECT 115 UNION SELECT 116 UNION SELECT 117 UNION SELECT 118 UNION
           SELECT 119 UNION SELECT 120) AS nums;
 
+
+
+-- Depo tipleri
+CREATE TABLE depot_types (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL UNIQUE,
+    size_m2 INT NOT NULL,
+    description TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+INSERT INTO depot_types (name, size_m2, description) VALUES
+('Küçük Depo', 20, 'Temel depolama ihtiyaçları için.'),
+('Orta Depo', 30, 'Orta ölçekli depolama için.'),
+('Büyük Depo', 35, 'Yüksek hacimli depolama için.');
+
 -- Müşteriler
 CREATE TABLE customers (
     id INT AUTO_INCREMENT PRIMARY KEY,

@@ -44,8 +44,8 @@ require_once __DIR__.'/config.php';
             <input type="text" name="depo" class="form-control text-uppercase" required>
         </div>
         <div class="mb-3">
-            <label class="form-label">Size Verilen 3 Haneli Kod</label>
-            <input type="password" name="kod" class="form-control" maxlength="3" required>
+            <label class="form-label">Sisteme Girilen Müşteri Telefonu</label>
+            <input type="text" name="phone" class="form-control" inputmode="numeric" pattern="0[0-9]+" title="Telefon numarası 0 ile başlamalı ve sadece rakamlardan oluşmalıdır." oninput="this.value=this.value.replace(/[^0-9]/g,'');" required>
         </div>
         <button class="btn btn-success w-100 fw-semibold">Bilgileri Göster</button>
     </form>

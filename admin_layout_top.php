@@ -119,6 +119,11 @@
                     </a>
                 </li>
                 <li>
+                    <a href="admin_depot_types.php" class="nav-link <?php echo ($_GET['m'] ?? '') === 'depot_types' ? 'active' : ''; ?>">
+                        <i class="bi bi-boxes me-2"></i> Depo Tip Yönetimi
+                    </a>
+                </li>
+                <li>
                     <a href="admin_settings.php" class="nav-link <?php echo ($_GET['m'] ?? '') === 'settings' ? 'active' : ''; ?>">
                         <i class="bi bi-gear me-2"></i> Ayarlar
                     </a>

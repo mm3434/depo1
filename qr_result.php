@@ -2,23 +2,27 @@
 require_once __DIR__.'/config.php';
 
 $depoCode = strtoupper(trim($_GET['depo'] ?? ''));
-$kod      = trim($_GET['kod'] ?? '');
+$phoneRaw = (string)($_GET['phone'] ?? '');
+$phone    = $phoneRaw;
 $error    = '';
 $data     = null;
 
-if ($depoCode && $kod) {
-    $pdo = get_db();
+if ($depoCode && $phone) {
+    if (!preg_match('/^0[0-9]+$/', $phone)) {
+        $error = 'Telefon numarası 0 ile başlamalı ve sadece rakamlardan oluşmalıdır.';
+    } else {
+        $pdo = get_db();
     $stmt = $pdo->prepare("
         SELECT c.full_name, r.start_date, r.end_date, d.code AS depot_code, r.status
         FROM rentals r
         JOIN depots d   ON d.id = r.depot_id
         JOIN customers c ON c.id = r.customer_id
         WHERE d.code = ? 
-          AND r.three_digit_code = ?
+          AND c.phone = ?
         ORDER BY r.id DESC
         LIMIT 1
     ");
-    $stmt->execute([$depoCode, $kod]);
+    $stmt->execute([$depoCode, $phone]);
     $row = $stmt->fetch();
     if ($row) {
         // İsim maskeleme: N*** E****
@@ -41,7 +45,8 @@ if ($depoCode && $kod) {
             'status'      => $row['status'] === 'active' ? 'Aktif' : 'Pasif',
         ];
     } else {
-        $error = 'Bilgiler bulunamadı. Depo numarası veya kod hatalı olabilir.';
+        $error = 'Bilgiler bulunamadı. Depo numarası veya telefon hatalı olabilir.';
+    }
     }
 } else {
     $error = 'Eksik bilgi gönderildi.';
